@@ -36,18 +36,18 @@ def process_and_clean_data(df_raw_input):
     df = df_raw_input.copy()
 
     # 1. จัดการคอลัมน์ Last_Restock เป็นรูปแบบวันที่ที่ถูกต้อง
-    df['Last_Restock'] = pd......................23....................(df['Last_Restock'], dayfirst=True)
+    df['Last_Restock'] = pd.to_datetime(df['Last_Restock'], dayfirst=True)
 
     # 2. จัดการสต๊อกติดลบ
-    df.loc[df['Current_Stock'] < 0, 'Current_Stock'] = .....................24....................
+    df.loc[df['Current_Stock'] < 0, 'Current_Stock'] = np.nan
     # เติมค่าว่างด้วยค่าเฉลี่ยแยกตามสินค้า
-    df['Current_Stock'] = df['Current_Stock']......................25....................(
-        df.groupby('Product_Name', observed=False)['Current_Stock']......................26....................('.....................27....................')
+    df['Current_Stock'] = df['Current_Stock'].fillna(
+        df.groupby('Product_Name', observed=False)['Current_Stock'].transform('mean')
     )
 
     # 3. เติมราคาทุนที่หายไป (ใช้ Unit_Cost เฉลี่ยแยกตามกลุ่มสินค้า)
-    df['Unit_Cost'] = df['Unit_Cost']......................28....................(
-        df.groupby('Product_Name')['Unit_Cost']......................29....................('.....................30....................')
+    df['Unit_Cost'] = df['Unit_Cost'].fillna(
+        df.groupby('Product_Name')['Unit_Cost'].transform('mean')
     )
 
     # 4. จัดการค่า Min_Requirement ที่สูงผิดปกติ
