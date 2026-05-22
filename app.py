@@ -11,7 +11,7 @@ st.info("7 Day Intensive Hands-on Workshop")
 st.markdown(''':rainbow[Ruthapoom] ''')
 
 # ใส่รูปตรงนี้
-st.image("113c5fe5-2418-415d-a879-32b97ecc1b23.png", use_container_width=True)
+st.image("pages/Screenshot 2026-05-22 160154.png", use_container_width=True)
 
 st.write("##### Day 1: การจัดการข้อมูลพื้นฐานและโครงสร้างข้อมูลด้วย Python")
  
