@@ -14,7 +14,7 @@ if st.button("💰 ระบบคำนวณส่วนลดตามยอ�
 
     st.switch_page("pages/app1_discount_calc.py")
 
-if st.button("💰 Customer Data Cleaner"):
+elif st.button("💰 Customer Data Cleaner"):
 
     st.switch_page("pages/clean_customers.py")
  
