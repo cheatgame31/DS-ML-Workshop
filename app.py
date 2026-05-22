@@ -34,9 +34,5 @@ elif st.button("💰 energy_inventory.py"):
 
     st.switch_page("pages/energy_inventory.py")
 
-
-elif st.button("💰 energy_inventory.py"):
-
-    st.switch_page("pages/energy_inventory.py")
  
  
