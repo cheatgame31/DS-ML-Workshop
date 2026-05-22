@@ -1,4 +1,4 @@
-%%writefile data_cleaning_page.py
+%%writefile data_cleaning_pageByGame.py
 import streamlit as st # ไลบรารีสำหรับสร้าง Web Application
 import pandas as pd # ไลบรารีสำหรับจัดการข้อมูลในรูปแบบ DataFrame
 import numpy as np # ไลบรารีสำหรับคำนวณทางคณิตศาสตร์
@@ -63,6 +63,13 @@ if uploaded_file is not None: # ถ้ามีการอัปโหลดไ
         st.subheader("🔄 3. Handle Inconsistent Data")
         cat_cols = ['Region', 'Product_Variant', 'Channel']
         
+        with st.expander("คลิกเพื่อดู Unique Values ก่อนแก้ไข"): # ใช้ expander
+            st.write("##### Unique Values ก่อนแก้ไข Inconsistent Values:") # หัวข้อย่อยแสดงค่าก่อนแก้ไข
+            for col in cat_cols: # วนลูปในแต่ละคอลัมน์
+                unique_vals = data[col].unique()
+                st.write(f"**📌 {col} ({len(unique_vals)} ค่า):**")
+                st.write(unique_vals)
+
         st.write("##### กำลังแก้ไข Inconsistent Values...")
 
         # 1. Standardize Region Column
@@ -99,21 +106,23 @@ if uploaded_file is not None: # ถ้ามีการอัปโหลดไ
         # 3. Standardize Channel Column
         data['Channel'] = data['Channel'].str.strip().str.lower()
         channel_mapping = {
-            'social media': 'SOCIAL MEDIA', 'social_media': 'SOCIAL MEDIA',
-            'tv ad': 'TV AD', 'tv ads': 'TV AD',
-            'tv advertisement': 'TV AD', 'television ad': 'TV AD',
-            'in-store promo': 'IN-STORE PROMO',
-            'f1 sponsorship': 'F1 SPONSORSHIP',
-            'extreme sports': 'EXTREME SPORTS'
+            'social media': 'Social Media', 'social_media': 'Social Media',
+            'tv ad': 'TV Ad', 'tv ads': 'TV Ad',
+            'tv advertisement': 'TV Ad', 'television ad': 'TV Ad',
+            'in-store promo': 'In-store Promo',
+            'f1 sponsorship': 'F1 Sponsorship',
+            'extreme sports': 'Extreme Sports'
         }
         data['Channel'] = data['Channel'].replace(channel_mapping)
-        data['Channel'] = data['Channel'].str.upper() # แปลงเป็นตัวพิมพ์ใหญ่ทั้งหมด
+        # Ensure consistent casing for any remaining channels not in mapping or to standardize from `Social Media` to `Social Media`.
+        data['Channel'] = data['Channel'].apply(lambda x: x.title() if isinstance(x, str) else x)
 
         # Convert Date to datetime
         data['Date'] = pd.to_datetime(data['Date'], format='mixed')
 
         st.success("✅ แก้ไข Inconsistent Values สำเร็จแล้ว!")
         with st.expander("คลิกเพื่อดู Unique Values หลังแก้ไข"): # ใช้ expander
+            st.write("##### Unique Values หลังแก้ไข Inconsistent Values:") # หัวข้อย่อยแสดงค่าหลังแก้ไข
             for col in cat_cols:
                 unique_vals = data[col].unique()
                 st.write(f"**📌 {col} ({len(unique_vals)} ค่า):**")
@@ -226,19 +235,20 @@ st.markdown("---  ") # เส้นแบ่ง
 if st.button("🚀 เริ่มต้นทำความสะอาดข้อมูล"): # ปุ่มสำหรับเริ่มกระบวนการ Data Cleaning
     st.write("### กำลังดำเนินการ Data Cleaning...")
     
-    # Apply cleaning steps based on user selection
-    if do_explore:
-        df = perform_data_exploration(df)
-    if do_duplicates:
-        df = handle_duplicate_data(df)
-    if do_inconsistent:
-        df = handle_inconsistent_data(df)
-    if do_missing:
-        df = handle_missing_data(df)
-    if do_noisy:
-        df = handle_noisy_data(df)
-    if do_outlier:
-        df = perform_outlier_analysis(df)
+    with st.spinner('กำลังประมวลผลข้อมูล...'): # Spinner สำหรับแสดงสถานะการโหลด
+        # Apply cleaning steps based on user selection
+        if do_explore:
+            df = perform_data_exploration(df)
+        if do_duplicates:
+            df = handle_duplicate_data(df)
+        if do_inconsistent:
+            df = handle_inconsistent_data(df)
+        if do_missing:
+            df = handle_missing_data(df)
+        if do_noisy:
+            df = handle_noisy_data(df)
+        if do_outlier:
+            df = perform_outlier_analysis(df)
 
     st.markdown("---  ")
     st.subheader("✅ 7. Cleaned Data Summary")
