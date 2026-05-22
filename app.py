@@ -17,4 +17,21 @@ if st.button("💰 ระบบคำนวณส่วนลดตามยอ�
 elif st.button("💰 Customer Data Cleaner"):
 
     st.switch_page("pages/clean_customers.py")
+
+elif st.button("💰 Customer Data Cleaner"):
+
+    st.switch_page("pages/clean_customers.py")
+
+elif st.button("💰 Customer Data Cleaner"):
+
+    st.switch_page("pages/clean_customers.py")
+
+elif st.button("💰 Customer Data Cleaner"):
+
+    st.switch_page("pages/clean_customers.py")
+
+elif st.button("💰 Customer Data Cleaner"):
+
+    st.switch_page("pages/clean_customers.py")
+ 
  
