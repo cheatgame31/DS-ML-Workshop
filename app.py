@@ -14,24 +14,29 @@ if st.button("💰 ระบบคำนวณส่วนลดตามยอ�
 
     st.switch_page("pages/app1_discount_calc.py")
 
-elif st.button("💰 Customer Data Cleaner"):
-
-    st.switch_page("pages/clean_customers.py")
 
 elif st.button("💰 Customer Data Cleaner"):
 
     st.switch_page("pages/clean_customers.py")
 
-elif st.button("💰 Customer Data Cleaner"):
 
-    st.switch_page("pages/clean_customers.py")
+elif st.button("💰 My App CLean Data"):
 
-elif st.button("💰 Customer Data Cleaner"):
+    st.switch_page("pages/test.py")
 
-    st.switch_page("pages/clean_customers.py")
 
-elif st.button("💰 Customer Data Cleaner"):
+elif st.button("💰 Clean App"):
 
-    st.switch_page("pages/clean_customers.py")
+    st.switch_page("pages/clean_app.py")
+
+
+elif st.button("💰 energy_inventory.py"):
+
+    st.switch_page("pages/energy_inventory.py")
+
+
+elif st.button("💰 energy_inventory.py"):
+
+    st.switch_page("pages/energy_inventory.py")
  
  
