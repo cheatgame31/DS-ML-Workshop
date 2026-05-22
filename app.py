@@ -10,6 +10,9 @@ st.info("7 Day Intensive Hands-on Workshop")
 
 st.markdown(''':rainbow[Ruthapoom] ''')
 
+# ใส่รูปตรงนี้
+st.image("113c5fe5-2418-415d-a879-32b97ecc1b23.png", use_container_width=True)
+
 st.write("##### Day 1: การจัดการข้อมูลพื้นฐานและโครงสร้างข้อมูลด้วย Python")
  
 if st.button("💰 ระบบคำนวณส่วนลดตามยอดซื้อ"):
@@ -35,6 +38,3 @@ elif st.button("💰 Clean App"):
 elif st.button("💰 energy_inventory.py"):
 
     st.switch_page("pages/energy_inventory.py")
-
- 
- 
