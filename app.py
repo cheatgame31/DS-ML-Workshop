@@ -7,57 +7,96 @@ st.set_page_config(
     page_title="DS & ML Bootcamp",
     page_icon="🚀",
     layout="wide",
-    initial_sidebar_state="expanded",
+    initial_sidebar_state="collapsed",
 )
 
 # ----------------------------------------------------------------------------
-# Custom styling
+# Theme & styling
 # ----------------------------------------------------------------------------
 st.markdown(
     """
     <style>
-        /* ซ่อน footer "Made with Streamlit" */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Sarabun:wght@400;500;600;700&display=swap');
+
+        html, body, [class*="css"] {
+            font-family: 'Inter', 'Sarabun', sans-serif;
+        }
+
+        /* ซ่อน element รก ๆ ของ Streamlit */
         footer {visibility: hidden;}
+        #MainMenu {visibility: hidden;}
+        .block-container { padding-top: 2.5rem; max-width: 1180px; }
 
+        /* ---------- Hero ---------- */
         .hero {
-            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
-            padding: 2.5rem 2rem;
-            border-radius: 18px;
-            color: white;
-            text-align: center;
-            margin-bottom: 1.5rem;
-            box-shadow: 0 10px 30px rgba(37, 117, 252, 0.25);
+            background:
+                radial-gradient(1200px 400px at 10% -20%, rgba(124,58,237,0.45), transparent),
+                radial-gradient(900px 400px at 100% 0%, rgba(37,99,235,0.45), transparent),
+                linear-gradient(135deg, #1e1b4b 0%, #312e81 100%);
+            padding: 3rem 2.5rem;
+            border-radius: 24px;
+            color: #fff;
+            margin-bottom: 0.5rem;
+            box-shadow: 0 20px 50px rgba(49, 46, 129, 0.35);
         }
-        .hero h1 { font-size: 2.6rem; margin: 0; font-weight: 800; }
-        .hero p  { font-size: 1.1rem; margin-top: 0.5rem; opacity: 0.95; }
-
-        .section-title {
-            font-size: 1.35rem;
-            font-weight: 700;
-            margin: 1.6rem 0 0.4rem 0;
-            padding-left: 0.6rem;
-            border-left: 5px solid #2575fc;
-        }
-        .section-sub { color: #8a8a8a; margin: 0 0 0.8rem 0.7rem; font-size: 0.92rem; }
-
-        /* ทำให้ปุ่มทุกอันสูงเท่ากัน ดูเป็น card */
-        div.stButton > button {
-            width: 100%;
-            min-height: 90px;
-            border-radius: 14px;
-            border: 1px solid rgba(37, 117, 252, 0.25);
-            font-size: 1.02rem;
+        .hero .eyebrow {
+            display: inline-block;
+            background: rgba(255,255,255,0.14);
+            padding: 0.3rem 0.9rem;
+            border-radius: 999px;
+            font-size: 0.8rem;
             font-weight: 600;
-            white-space: normal;
-            line-height: 1.35;
-            transition: all 0.18s ease-in-out;
-            background: var(--background-color);
+            letter-spacing: 0.04em;
+            margin-bottom: 1rem;
         }
-        div.stButton > button:hover {
-            border-color: #2575fc;
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(37, 117, 252, 0.22);
-            color: #2575fc;
+        .hero h1 {
+            font-size: 2.7rem;
+            line-height: 1.15;
+            margin: 0;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+        }
+        .hero p { font-size: 1.05rem; margin-top: 0.7rem; opacity: 0.85; max-width: 640px; }
+
+        /* ---------- Section heading ---------- */
+        .sec {
+            font-size: 0.78rem;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: #7c3aed;
+            margin: 2.2rem 0 1rem 0.2rem;
+        }
+
+        /* ---------- Cards (buttons) ---------- */
+        div[data-testid="stVerticalBlock"] div.stButton > button {
+            width: 100%;
+            min-height: 132px;
+            padding: 1.2rem 1.3rem;
+            border-radius: 18px;
+            border: 1px solid rgba(0,0,0,0.06);
+            background: #ffffff;
+            box-shadow: 0 2px 8px rgba(16,24,40,0.05);
+            text-align: left;
+            white-space: pre-line;
+            line-height: 1.4;
+            font-family: 'Inter', 'Sarabun', sans-serif;
+            transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+        }
+        div[data-testid="stVerticalBlock"] div.stButton > button:hover {
+            transform: translateY(-4px);
+            border-color: rgba(124,58,237,0.55);
+            box-shadow: 0 16px 34px rgba(124,58,237,0.18);
+        }
+        div[data-testid="stVerticalBlock"] div.stButton > button:active { transform: translateY(-1px); }
+        div[data-testid="stVerticalBlock"] div.stButton > button:focus { box-shadow: 0 16px 34px rgba(124,58,237,0.18); }
+
+        /* ปรับสำหรับ dark theme */
+        @media (prefers-color-scheme: dark) {
+            div[data-testid="stVerticalBlock"] div.stButton > button {
+                background: #1a1a23;
+                border-color: rgba(255,255,255,0.08);
+            }
         }
     </style>
     """,
@@ -70,78 +109,67 @@ st.markdown(
 st.markdown(
     """
     <div class="hero">
-        <h1>🚀 Data Science & Machine Learning Bootcamp</h1>
-        <p>7 Day Intensive Hands-on Workshop&nbsp;·&nbsp;by <b>Ruthapoom</b></p>
+        <span class="eyebrow">7-DAY INTENSIVE WORKSHOP</span>
+        <h1>Data Science &amp;<br>Machine Learning Bootcamp</h1>
+        <p>รวมแอปพลิเคชันทั้งหมดจากเวิร์กชอป — เลือกหัวข้อที่ต้องการเพื่อเริ่มใช้งานได้ทันที</p>
     </div>
     """,
     unsafe_allow_html=True,
 )
 
 # ----------------------------------------------------------------------------
-# โครงสร้างเมนู: (label, page path, emoji)
+# โครงสร้างเมนู
 # ----------------------------------------------------------------------------
 SECTIONS = [
     {
-        "title": "🐍 Day 1 · Python & การจัดการข้อมูลพื้นฐาน",
-        "sub": "พื้นฐานโครงสร้างข้อมูลและการคำนวณด้วย Python",
+        "label": "Day 1 · Python Foundations",
         "apps": [
-            ("ระบบคำนวณส่วนลดตามยอดซื้อ", "pages/app1_discount_calc.py", "💰"),
-            ("ระบบวิเคราะห์คลังสินค้า", "pages/energy_inventory.py", "📦"),
+            ("💰", "คำนวณส่วนลด", "คำนวณส่วนลดตามยอดซื้อของลูกค้า", "pages/app1_discount_calc.py"),
+            ("📦", "วิเคราะห์คลังสินค้า", "สรุปมูลค่าสต๊อกและสินค้าที่ต้องสั่งซื้อ", "pages/energy_inventory.py"),
         ],
     },
     {
-        "title": "🧹 Data Cleaning · การทำความสะอาดข้อมูล",
-        "sub": "จัดการข้อมูลดิบให้พร้อมใช้งาน",
+        "label": "Data Cleaning",
         "apps": [
-            ("Customer Data Cleaner", "pages/clean_customers.py", "📂"),
-            ("Data Cleaning Workshop", "pages/clean_app.py", "🐂"),
-            ("Energy Drink Sales Cleaning", "pages/clean_energy_drink_sales.py", "🥤"),
-            ("My App Clean Data", "pages/test.py", "🧼"),
+            ("📂", "Customer Data Cleaner", "ทำความสะอาดข้อมูลลูกค้า", "pages/clean_customers.py"),
+            ("🐂", "Cleaning Workshop", "เวิร์กชอปทำความสะอาดข้อมูล", "pages/clean_app.py"),
+            ("🥤", "Energy Drink Cleaning", "เคลียร์ข้อมูลยอดขายเครื่องดื่ม", "pages/clean_energy_drink_sales.py"),
+            ("🧼", "My Clean Data App", "เครื่องมือทำความสะอาดข้อมูลทั่วไป", "pages/test.py"),
         ],
     },
     {
-        "title": "🛠️ Transform & EDA · แปลงและสำรวจข้อมูล",
-        "sub": "Data Transformation และ Exploratory Data Analysis",
+        "label": "Transform & EDA",
         "apps": [
-            ("Data Transformation App", "pages/transform_app.py", "🛠️"),
-            ("EDA: Red Bull Sales", "pages/EDA_app.py", "💡"),
+            ("🛠️", "Data Transformation", "แปลงและปรับรูปแบบข้อมูล", "pages/transform_app.py"),
+            ("💡", "EDA · Red Bull Sales", "สำรวจและวิเคราะห์ข้อมูลเชิงลึก", "pages/EDA_app.py"),
         ],
     },
     {
-        "title": "🤖 Machine Learning · พยากรณ์และจำแนกข้อมูล",
-        "sub": "โมเดลทำนายยอดขายและการจัดตารางขนส่ง",
+        "label": "Machine Learning",
         "apps": [
-            ("Red Bull High Sales Predictor", "pages/classify_redbull_sale.py", "🎯"),
-            ("Sales Prediction App", "pages/sale_predict.py", "📈"),
-            ("Logistics Service Time Prediction", "pages/truck_predict.py", "🚛"),
+            ("🎯", "High Sales Predictor", "จำแนกสินค้าขายดีด้วยโมเดล ML", "pages/classify_redbull_sale.py"),
+            ("📈", "Sales Prediction", "พยากรณ์ยอดขายล่วงหน้า", "pages/sale_predict.py"),
+            ("🚛", "Logistics Prediction", "ทำนายเวลาบริการและจัดตารางขนส่ง", "pages/truck_predict.py"),
         ],
     },
 ]
 
-# ----------------------------------------------------------------------------
-# Render เมนูแบบ grid 3 คอลัมน์
-# ----------------------------------------------------------------------------
 COLS_PER_ROW = 3
 
 for section in SECTIONS:
-    st.markdown(f'<div class="section-title">{section["title"]}</div>', unsafe_allow_html=True)
-    st.markdown(f'<div class="section-sub">{section["sub"]}</div>', unsafe_allow_html=True)
-
+    st.markdown(f'<div class="sec">{section["label"]}</div>', unsafe_allow_html=True)
     apps = section["apps"]
     for i in range(0, len(apps), COLS_PER_ROW):
         row = apps[i : i + COLS_PER_ROW]
-        cols = st.columns(COLS_PER_ROW)
-        for col, (label, page, emoji) in zip(cols, row):
+        cols = st.columns(COLS_PER_ROW, gap="medium")
+        for col, (emoji, title, desc, page) in zip(cols, row):
             with col:
-                if st.button(f"{emoji}\n\n{label}", key=page):
+                if st.button(f"{emoji}\n\n{title}\n{desc}", key=page):
                     st.switch_page(page)
 
 # ----------------------------------------------------------------------------
-# Sidebar
+# Footer
 # ----------------------------------------------------------------------------
-with st.sidebar:
-    st.markdown("### 🚀 DS & ML Bootcamp")
-    st.caption("เลือกแอปจากหน้าหลัก หรือเมนูด้านล่าง")
-    st.divider()
-    st.info("7 Day Intensive Hands-on Workshop")
-    st.markdown("Made with ❤️ by **Ruthapoom**")
+st.markdown("<br>", unsafe_allow_html=True)
+st.divider()
+st.caption("Made with ❤️ by Ruthapoom · DS & ML Bootcamp")
