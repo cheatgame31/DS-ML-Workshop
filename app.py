@@ -502,6 +502,12 @@ SECTIONS = [
                 "desc": "จัดกลุ่มลูกค้าจากรูปแบบข้อมูลเพื่อช่วยวิเคราะห์พฤติกรรมและมูลค่า",
                 "page": "pages/clustering_segment.py",
             },
+            {
+                "tag": "ASSO",
+                "title": "association",
+                "desc": "association item",
+                "page": "pages/association_items.py",
+            },
         ],
     },
 ]
